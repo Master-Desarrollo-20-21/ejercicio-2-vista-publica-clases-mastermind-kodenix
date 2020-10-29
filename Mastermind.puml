@@ -4,64 +4,58 @@
 title MasterMind - Diagrama de clases Vistas Públicas
 
 class MasterMind {
+    -Board board
+    -BreakerPlayer breakerPlayer
     +play()
     +exit()
 }
 class Board {
-    +Board(Combination secretCombination)
-    +void setProposedCombination(ProposedCombination combination)
-    +Result getResult()
+    -Combination secretCombination
+    -Combination proposedCombination
+    -void generateSecret()
+    -boolean isWinner()
+    +void setProposedCombination(ProposedCombination proposedCombination)
+    +void printResult()
 }
-class Player
-class MakerPlayer {
-    +SecretCombination generateSecret()
-}
+
 class BreakerPlayer {
-    +ProposedCombination createCombination()
+    +ProposedCombination proposeCombination()
 }
+
 class Combination {
-   +bool isEqual(Combination combination)
+   -Color[4] positions 
+   
 }
-class ProposedCombination
+
+class ProposedCombination {
+    -int successBlackPosition
+    -int successWhitePosition
+    +void setSuccessPositions(Combination secret)
+}
+
 class SecretCombination
-class Result {
-    +boolean isWinner()
+
+ProposedCombination --> SecretCombination
+
+enum Color {
+    Red
+    Blue
+    Yellow
+    Green
+    Orange
+    Purple
 }
-class WinnerResult {}
-class Success {}
-class Black
-class White
-class Position
-class Color
 
 MasterMind *--> Board
-MasterMind *--> "2" Player
+MasterMind *--> BreakerPlayer
 Board *--> SecretCombination
 Board o--> ProposedCombination
-Player ^-- MakerPlayer
-Player ^-- BreakerPlayer
-MakerPlayer --> SecretCombination
-BreakerPlayer --> "10" ProposedCombination
-Board o--> "0..10" Result
+BreakerPlayer --> Board : setProposedCombination
+BreakerPlayer --> "10" ProposedCombination : return
+
 
 Combination ^-- SecretCombination
 Combination ^-- ProposedCombination
-Combination *--> "4" Position
-
-Result ^-- WinnerResult
-Result *--> Success 
-Result --> SecretCombination
-WinnerResult *--> "4" Black
-Position o--> Color
-Success --> Color
-Success ^-- Black
-Success ^-- White
-
-Color --> Red
-Color --> Blue
-Color --> Yellow
-Color --> Green
-Color --> Orange
-Color --> Purple
+Combination *--> "4" Color
 
 @enduml
