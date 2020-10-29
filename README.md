@@ -1,7 +1,7 @@
 MasterMind: Modelo del dominio - Vistas pública
 ----
 ### Diagrama de clases
-![Clases](out/plantuml/class/MasterMind_v1.png)
+![Clases](MasterMind.png)
 
 # ProgramacionOO Ejercicio2
 # Vista pública de las clases del juego Mastermind
