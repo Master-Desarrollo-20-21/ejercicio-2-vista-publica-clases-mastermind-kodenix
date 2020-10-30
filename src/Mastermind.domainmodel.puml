@@ -1,0 +1,66 @@
+@startuml MasterMindDomainModel_v1
+
+title MasterMind - Domain Model
+
+class MasterMind {
+    +play()
+    +exit()
+}
+class Board {
+    +Board(Combination secretCombination)
+    +void setProposedCombination(ProposedCombination combination)
+    +Result getResult()
+}
+class Player
+class MakerPlayer {
+    +SecretCombination generateSecret()
+}
+class BreakerPlayer {
+    +ProposedCombination createCombination()
+}
+class Combination {
+   +bool isEqual(Combination combination)
+}
+class ProposedCombination
+class SecretCombination
+class Result {
+    +boolean isWinner()
+}
+class WinnerResult {}
+class Success {}
+class Black
+class White
+class Position
+class Color
+
+MasterMind *--> Board
+MasterMind *--> "2" Player
+Board *--> SecretCombination
+Board o--> ProposedCombination
+Player ^-- MakerPlayer
+Player ^-- BreakerPlayer
+MakerPlayer --> SecretCombination
+BreakerPlayer --> "10" ProposedCombination
+Board o--> "0..10" Result
+
+Combination ^-- SecretCombination
+Combination ^-- ProposedCombination
+Combination *--> "4" Position
+
+Result ^-- WinnerResult
+Result *--> Success 
+Result --> SecretCombination
+WinnerResult *--> "4" Black
+Position o--> Color
+Success --> Color
+Success ^-- Black
+Success ^-- White
+
+Color --> Red
+Color --> Blue
+Color --> Yellow
+Color --> Green
+Color --> Orange
+Color --> Purple
+
+@enduml

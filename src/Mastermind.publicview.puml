@@ -1,7 +1,7 @@
 
-@startuml MasterMind
+@startuml MasterMindPublicView_v1
 
-title MasterMind - Diagrama de clases Vistas Públicas
+title MasterMind - Public View
 
 class MasterMind {
     -Board board
@@ -50,7 +50,7 @@ MasterMind *--> Board
 MasterMind *--> BreakerPlayer
 Board *--> SecretCombination
 Board o--> ProposedCombination
-BreakerPlayer --> Board : setProposedCombination
+BreakerPlayer --> "1..10" Board : setProposedCombination
 BreakerPlayer --> "10" ProposedCombination : return
 
 
